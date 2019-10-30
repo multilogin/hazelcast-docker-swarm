@@ -37,7 +37,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>multilogin/hazelcast-docker-swarm</repository>
+                    <repository>reshordling/hazelcast-docker-swarm</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
