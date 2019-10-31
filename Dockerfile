@@ -1,5 +1,5 @@
 FROM openjdk:8u171-jre-alpine
-MAINTAINER Pavel <pavel@multiloginapp.com>
+LABEL authors="Pavel <pavel@multiloginapp.com>, Igor <igorzep@gmail.com>"
 
 # Versions of Hazelcast and Hazelcast plugins
 ARG HZ_VERSION=3.10.6
