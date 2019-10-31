@@ -1,0 +1,52 @@
+<hazelcast xmlns="http://www.hazelcast.com/schema/config"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+http://www.hazelcast.com/schema/config hazelcast-config-3.9.xsd
+">
+    <group>
+        <name>ACCOUNT</name>
+        <password>PASSWORD</password>
+    </group>
+    <properties>
+        <property name="hazelcast.discovery.enabled">true</property>
+    </properties>
+    <network>
+        <member-address-provider enabled="true">
+            <class-name>org.bitsofinfo.hazelcast.spi.docker.swarm.dnsrr.DockerDNSRRMemberAddressProvider</class-name>
+            <properties>
+                <property name="serviceName">tasks.hazelcast</property>
+            </properties>
+        </member-address-provider>
+        <join>
+            <multicast enabled="false"/>
+            <aws enabled="false"/>
+            <tcp-ip enabled="false" />
+
+            <discovery-strategies>
+                <discovery-strategy enabled="true"
+                                    class="org.bitsofinfo.hazelcast.spi.docker.swarm.dnsrr.discovery.DockerDNSRRDiscoveryStrategy">
+
+                    <properties>
+                        <property name="peerServicesCsv">tasks.hazelcast</property>
+                    </properties>
+                </discovery-strategy>
+            </discovery-strategies>
+        </join>
+    </network>
+
+    <management-center enabled="true" update-interval="3">
+        http://hazelcast-mgmt:8080/mancenter/
+    </management-center>
+
+    <user-code-deployment enabled="true">
+        <class-cache-mode>ETERNAL</class-cache-mode>
+        <provider-mode>LOCAL_AND_CACHED_CLASSES</provider-mode>
+    </user-code-deployment>
+
+    <map name="*">
+        <!-- 1d = 24h * 60m * 60s == 86_400s -->
+        <time-to-live-seconds>86400</time-to-live-seconds>
+        <eviction-policy>LRU</eviction-policy>
+        <max-size>100000</max-size>
+    </map>
+</hazelcast>

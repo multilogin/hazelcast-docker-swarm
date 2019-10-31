@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  hazelcast:
+    image: vasilyt/hazelcast-docker-swarm
+#    image: multilogin/hazelcast-docker-swarm:3.10.6-1.0-RC8
+    configs:
+      - source: hazelcast-cache-service_hazelcast.xml
+        target: /opt/hazelcast/hazelcast.xml
+    deploy:
+      replicas: 2
+#      placement:
+#        constraints: [node.labels.hazelcast==true]
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 9999999
+        window: 90s
+
+configs:
+  hazelcast-cache-service_hazelcast.xml:
+    file: ./hazelcast.xml
+  config-service_logback.xml:
+    file: ./logback.xml
