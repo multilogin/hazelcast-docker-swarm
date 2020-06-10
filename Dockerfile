@@ -1,4 +1,4 @@
-FROM openjdk:8u171-jre-alpine
+FROM alpine:3.11
 LABEL authors="Pavel <pavel@multiloginapp.com>, Igor <igorzep@gmail.com>"
 
 # Versions of Hazelcast and Hazelcast plugins
@@ -12,7 +12,7 @@ ARG HZ_JAR="hazelcast-all-${HZ_VERSION}.jar"
 ARG CACHE_API_JAR="cache-api-${CACHE_API_VERSION}.jar"
 
 # Install bash & curl
-RUN apk add --no-cache bash curl \
+RUN apk add --no-cache bash curl openjdk11-jre procps nss \
  && rm -rf /var/cache/apk/*
 
 # Set up build directory
