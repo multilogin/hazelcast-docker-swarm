@@ -29,7 +29,7 @@ RUN curl -svf -o ${HZ_HOME}/${CACHE_API_JAR} \
 
 # Download and install Hazelcast plugins (hazelcast-swarm) with dependencies
 RUN curl -svf -o ${HZ_HOME}/hazelcast-docker-swarm-discovery-spi.jar \
-         -L http://repo.spring.io/plugins-release/org/bitsofinfo/hazelcast-docker-swarm-discovery-spi/${HZ_SWARM_VERSION}/hazelcast-docker-swarm-discovery-spi-${HZ_SWARM_VERSION}.jar
+         -L https://repo.spring.io/plugins-release/org/bitsofinfo/hazelcast-docker-swarm-discovery-spi/${HZ_SWARM_VERSION}/hazelcast-docker-swarm-discovery-spi-${HZ_SWARM_VERSION}.jar
 
 # Set Pardot ID to 'docker'
 RUN echo 'hazelcastDownloadId=docker' > hazelcast-download.properties
@@ -60,4 +60,4 @@ CMD ["bash", "-c", "set -euo pipefail \
       && echo \"########################################\" \
       && set -x \
       && exec java -server ${JAVA_OPTS} com.hazelcast.core.server.StartServer \
-     "]     
+     "]

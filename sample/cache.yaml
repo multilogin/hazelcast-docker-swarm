@@ -4,18 +4,16 @@ services:
   hazelcast:
     image: multilogin/hazelcast-docker-swarm
     configs:
-      - source: hazelcast-cache-service_hazelcast.xml
+      - source: hazelcast.xml
         target: /opt/hazelcast/hazelcast.xml
     deploy:
       replicas: 2
       restart_policy:
         condition: any
         delay: 5s
-        max_attempts: 9999999
+        max_attempts: 10
         window: 90s
 
 configs:
-  hazelcast-cache-service_hazelcast.xml:
+  hazelcast.xml:
     file: ./hazelcast.xml
-  config-service_logback.xml:
-    file: ./logback.xml
