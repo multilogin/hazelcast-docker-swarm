@@ -60,4 +60,4 @@ CMD ["bash", "-c", "set -euo pipefail \
       && echo \"########################################\" \
       && set -x \
       && exec java -server ${JAVA_OPTS} com.hazelcast.core.server.StartServer \
-     "]     
+     "]
